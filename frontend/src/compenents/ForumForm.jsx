@@ -1,14 +1,66 @@
-export default function ForumForm(props) {
-    return (
-        <div>
-          <form onSubmit={props.handleSubmit}>
-            <input 
-            placeholder='Enter some title...'
-            onChange={props.hadleForumTitleChange}
-            value={props.forumTitle}
-            />
-            <button >Create</button>
-          </form>
-        </div>
-    )
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+export default function ForumForm() {
+
+  let navigate = useNavigate();
+
+  const [data, setData] = useState({
+    "topic": "",
+    "description": ""
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    axios
+        .post("http://localhost:3001/api/forums", data)
+        .then((res) => {
+            setData({ topic: "", description: "" });
+            console.log(res.data.message);
+        })
+        .catch((err) => {
+            console.log("Error couldn't create forum");
+            console.log(err.message);
+        });
+    
+    navigate("/forums")
+  }
+
+  function handleChange(e) {
+    setData({
+      ...data,
+      [e.target.name] : e.target.value
+    });
+  }
+
+  return (
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label className="label" htmlFor="topic">
+              Topic
+          </label>
+          <input 
+          type="text"
+          name="topic"
+          placeholder='Enter some topic...'
+          onChange={handleChange}
+          value={data.topic}
+          />
+
+          <label className="label" htmlFor="description">
+              Description
+          </label>
+          <textarea 
+          type="text"
+          name="description"
+          placeholder="Enter some small description..."
+          onChange={handleChange}
+          value={data.description}
+          />
+          <button >Create</button>
+        </form>
+      </div>
+  )
 }

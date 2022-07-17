@@ -1,10 +1,18 @@
+import { Link } from "react-router-dom";
+
 export default function ForumCard({forum}) {
-    const {_id, topic, description} = forum;
+    const {_id:forumId, topic, description} = forum;
 
     return (
-        <li key={_id}>
+        <li key={forumId}>
             <div className="title-description">
-                <h3>{topic}</h3>
+                <Link 
+                    to={`/forums/${forumId}`}
+                    key={forumId}
+                >
+                    <h3>{topic}</h3>
+                </Link>
+                
                 <p>{description}</p>
             </div>
 

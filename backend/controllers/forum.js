@@ -10,6 +10,16 @@ const getAllForums = (req, res) => {
         );
 };
 
+const getForumById = (req, res) => {
+    Forum.findById(req.params.id)
+        .then((forum) => res.json(forum))
+        .catch((err) =>
+            res
+                .status(404)
+                .json({ message: "Forum not found", error: err.message })
+        );
+};
+
 const createForum = (req, res) => {
     Forum.create(req.body)
         .then((data) => res.json({ message: "Forum added successfully", data }))
@@ -44,7 +54,8 @@ const deleteForum = (req, res) => {
 
 module.exports = {
     getAllForums,
+    getForumById,
     createForum,
     updateForum,
-    deleteForum
+    deleteForum,
 };
