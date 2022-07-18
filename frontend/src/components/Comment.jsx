@@ -1,5 +1,8 @@
+import { useSelector } from "react-redux";
+
 export default function Comment({data}) {
-    const {_id, text, createdDate} = data;
+    const {_id, text, createdDate, author: authorId} = data;
+    const user = useSelector((state) => state.user.value);
 
     return (
         <li key={_id}>
@@ -8,10 +11,10 @@ export default function Comment({data}) {
                 <p>{createdDate}</p>
             </div>
 
+            { user.userId == authorId &&
             <div className="button-container">
-                <button className="button">edit</button>
                 <button className="button">delete</button>
-            </div>
+            </div>}
         </li>
     );
 }

@@ -11,7 +11,7 @@ export default function ForumList() {
         axios
             .get("http://localhost:3001/api/forums")
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setForums(res.data);
             })
             .catch((err) => {

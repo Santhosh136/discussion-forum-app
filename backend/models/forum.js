@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Comment = require("./comment");
+const User = require("./user");
 
 const forumSchema = new mongoose.Schema({
     topic: {
@@ -9,6 +10,10 @@ const forumSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: User
     },
     comments: [{
         type: mongoose.Schema.Types.ObjectId,

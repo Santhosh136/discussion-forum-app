@@ -1,10 +1,12 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function ForumForm() {
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.value);
 
   const [data, setData] = useState({
     "topic": "",
@@ -15,7 +17,12 @@ export default function ForumForm() {
     e.preventDefault();
 
     axios
-        .post("http://localhost:3001/api/forums", data)
+        .post("http://localhost:3001/api/forums",
+        {
+          ...data,
+          "author": user.userId
+        },
+        { withCredentials: true })
         .then((res) => {
             setData({ topic: "", description: "" });
             console.log(res.data.message);

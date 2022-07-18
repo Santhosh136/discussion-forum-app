@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import Comment from "./Comment";
 import CommentForum from "./CommentForm";
@@ -8,6 +9,7 @@ export default function ForumPage() {
 
     const [comments, setComments] = useState([]);
     const params = useParams();
+    const user = useSelector((state) => state.user.value);
 
     const topic = " topic from store";
     const description = "description from store";
@@ -16,7 +18,7 @@ export default function ForumPage() {
         axios
             .get(`http://localhost:3001/api/forums/${params.forumId}/comments`)
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 setComments(res.data);
             })
             .catch((err) => {
@@ -29,7 +31,7 @@ export default function ForumPage() {
             <section className="contents">
                 <h1>{topic}</h1>
                 <p>{description}</p>
-                <CommentForum forumId={params.forumId} />
+                {user.isLoggedIn && <CommentForum forumId={params.forumId} />}
                 <ul className="list-container">
                     {comments.map((comment) => (
                         <Comment data={comment} />

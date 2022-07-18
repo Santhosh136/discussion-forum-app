@@ -21,34 +21,11 @@ const loginUser = (req, res) => {
         password: req.body.password
     });
 
-    /**
-     * router.post('/login', (req, res) => {
-        passport.authenticate('local', (err, user, info) => {
-            if (err) {
-            return res.status(500).send();
-            }
-            if (!user && info) {
-            return res.status(422).send(info);
-            }
-
-            // do something here and send back a res.json()
-        })(req, res);
-        });
-     */
-
-        /**
-         * , (err, user, info) => {
-            if(err) console.log("local err ",err);
-            if(!user) res.status(401).send("username or password is incorrect");
-            res.status(200).send('OK');       
-        }
-         */
-
     req.login(user, (err) => {
         if(err) return res.status(500).send({ error : err.message });
         passport.authenticate("local")(req, res, (err)=> {
             if(err) console.log(err);
-            res.status(200).send('OK');   
+            res.status(200).send(req.user._id);
         });
     })
 };

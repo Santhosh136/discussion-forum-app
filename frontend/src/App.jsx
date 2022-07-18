@@ -1,21 +1,31 @@
-import { Link, Outlet } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProtectedRoutes from './components/auth/ProtectedRoutes';
+import RegisterForm from './components/auth/RegisterForm';
+import LoginForm from './components/auth/LoginForm';
+import LogoutForm from './components/auth/LogoutForm';
+import ForumForm from './components/ForumForm';
+import ForumList from './components/ForumList';
+import ForumPage from './components/ForumPage';
+import Layout from "./components/Layout";
 
 function App() {
   return (
 
     <div className="app-contents">
-        <h2>DiscForum</h2>
-        <nav
-          style={{
-            borderBottom: "solid 1px",
-            paddingBottom: "1rem",
-          }}
-        >
-          <Link to="/create-forum">Create a new forum</Link> | {' '}
-          <Link to="/forums">Forums</Link> | {' '}
-          <Link to="/logout">Logout</Link>
-        </nav>
-        <Outlet />
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={ <Layout /> } >
+              <Route path='register' element={ <RegisterForm /> } />
+              <Route element={ <ProtectedRoutes /> } >
+              <Route path='create-forum' element={ <ForumForm /> } />  
+              </Route>
+              <Route path='logout' element={ <LogoutForm /> } />
+              <Route path='login' element={ <LoginForm /> } />
+              <Route path='forums' element={ <ForumList /> } />
+              <Route path='forums/:forumId' element= { <ForumPage /> } />
+            </Route>
+          </Routes>
+        </BrowserRouter>
     </div>
 );
 }

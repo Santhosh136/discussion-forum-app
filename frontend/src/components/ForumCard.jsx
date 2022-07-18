@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function ForumCard({forum}) {
-    const {_id:forumId, topic, description} = forum;
+    const {_id:forumId, topic, description, author: authorId} = forum;
+    const user = useSelector((state) => state.user.value);
 
     return (
         <li key={forumId}>
@@ -16,10 +18,12 @@ export default function ForumCard({forum}) {
                 <p>{description}</p>
             </div>
 
+            { user.userId == authorId && 
             <div className="button-container">
-                <button className="button">edit</button>
                 <button className="button">delete</button>
             </div>
+            }
+            
         </li>
     );
 }

@@ -1,10 +1,13 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../features/user";
 
 export default function LoginForm() {
 
-    let navigate = useNavigate();
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
 
     const [data, setData] = useState({
         "username": "",
@@ -20,6 +23,7 @@ export default function LoginForm() {
             .post("http://localhost:3001/api/auth/login", data, 
             { withCredentials: true },)
             .then((res) => {
+                dispatch(login({userId:res.data, username: data.username, isLoggedIn: true}));
                 setData({ username: "", password: "" });
                 navigate("/forums");
             })
