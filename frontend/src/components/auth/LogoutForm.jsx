@@ -12,7 +12,7 @@ export default function LogoutForm() {
         e.preventDefault();
     
         axios
-            .post("http://localhost:3001/api/auth/logout",  
+            .post("/api/auth/logout",  
             { withCredentials: true },)
             .then((res) => {
                 dispatch(logout());

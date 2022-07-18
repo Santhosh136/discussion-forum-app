@@ -17,7 +17,7 @@ export default function ForumForm() {
     e.preventDefault();
 
     axios
-        .post("http://localhost:3001/api/forums",
+        .post("/api/forums",
         {
           ...data,
           "author": user.userId

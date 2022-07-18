@@ -9,7 +9,7 @@ export default function ForumList() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:3001/api/forums")
+            .get("/api/forums")
             .then((res) => {
                 // console.log(res.data);
                 setForums(res.data);

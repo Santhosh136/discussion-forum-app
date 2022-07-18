@@ -16,7 +16,7 @@ export default function ForumPage() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3001/api/forums/${params.forumId}/comments`)
+            .get(`/api/forums/${params.forumId}/comments`)
             .then((res) => {
                 // console.log(res.data);
                 setComments(res.data);

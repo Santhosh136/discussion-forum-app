@@ -16,7 +16,7 @@ export default function CommentForum({ forumId }) {
     e.preventDefault();
 
     axios
-        .post(`http://localhost:3001/api/forums/${forumId}/comments`, 
+        .post(`/api/forums/${forumId}/comments`, 
         {...data, "author": user.userId},
         { withCredentials: true })
         .then((res) => {
