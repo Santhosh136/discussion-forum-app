@@ -12,7 +12,8 @@ function App() {
           }}
         >
           <Link to="/create-forum">Create a new forum</Link> | {' '}
-          <Link to="/forums">Forums</Link>
+          <Link to="/forums">Forums</Link> | {' '}
+          <Link to="/logout">Logout</Link>
         </nav>
         <Outlet />
     </div>

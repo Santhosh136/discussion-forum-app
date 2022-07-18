@@ -60,6 +60,7 @@ export default function ForumForm() {
           value={data.description}
           />
           <button >Create</button>
+          <button type="cancel">Cancel</button>
         </form>
       </div>
   )
