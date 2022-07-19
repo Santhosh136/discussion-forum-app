@@ -20,7 +20,7 @@ export default function LoginForm() {
         e.preventDefault();
     
         axios
-            .post("http://localhost:3001/api/auth/login", data, 
+            .post("/api/auth/login", data, 
             { withCredentials: true },)
             .then((res) => {
                 dispatch(login({userId:res.data, username: data.username, isLoggedIn: true}));

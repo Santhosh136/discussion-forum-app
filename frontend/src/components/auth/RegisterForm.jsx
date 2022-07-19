@@ -14,7 +14,7 @@ export default function RegisterForm() {
     function handleSubmit(e) {
         e.preventDefault();
         axios
-            .post("http://localhost:3001/api/auth/register", data, 
+            .post("/api/auth/register", data, 
             { withCredentials: true})
             .then((res) => {
                 console.log(res);
