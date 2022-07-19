@@ -41,7 +41,14 @@ export default function LoginForm() {
           ...data,
           [e.target.name] : e.target.value
         });
-      }
+    }
+
+    function handleCancel(e) {
+        setData({
+            "username": "",
+            "password": ""
+        })
+    }
 
     return (
         <div>
@@ -66,7 +73,7 @@ export default function LoginForm() {
                     value={data.password}
                 />
                 <button>Login</button>
-                <button type="cancel">Cancel</button>
+                <button onClick={handleCancel} >Cancel</button>
 
                 <p>New user? sign up here 
                     <Link to="/register" >Sing up</Link>

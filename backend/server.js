@@ -41,13 +41,8 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// app.use((req, res, next) => {
-//     console.log(req.session);
-//     console.log(req.user);
-//     next(); 
-// })
-
-
+// test api
+app.get("/api", (req, res) => res.send("Hello"));
 
 // use routes
 app.use("/api/forums", forumRoutes);

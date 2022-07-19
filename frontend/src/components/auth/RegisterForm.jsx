@@ -33,7 +33,14 @@ export default function RegisterForm() {
           ...data,
           [e.target.name] : e.target.value
         });
-      }
+    }
+
+    function handleCancel(e) {
+        setData({
+            "username": "",
+            "password": ""
+        })
+    }
 
     return (
         <div>
@@ -55,7 +62,7 @@ export default function RegisterForm() {
                     value={data.password}
                 />
                 <button>Register</button>
-                <button type="cancel">Cancel</button>
+                <button onClick={handleCancel}>Cancel</button>
             </form>
         </div>
     )

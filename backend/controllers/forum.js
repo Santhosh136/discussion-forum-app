@@ -41,9 +41,11 @@ const updateForum = (req, res) => {
 };
 
 const deleteForum = (req, res) => {
-    Forum.findByIdAndRemove(req.params.id, req.body)
+    Forum.findByIdAndRemove(req.params.id)
         .then((data) =>
-            res.json({ message: "Forum deleted successfully", data })
+            res
+            .status(202)
+            .json({ message: "Forum deleted successfully", data })
         )
         .catch((err) =>
             res

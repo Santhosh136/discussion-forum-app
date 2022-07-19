@@ -18,7 +18,6 @@ export default function ForumPage() {
         axios
             .get(`/api/forums/${params.forumId}/comments`)
             .then((res) => {
-                // console.log(res.data);
                 setComments(res.data);
             })
             .catch((err) => {
@@ -34,7 +33,7 @@ export default function ForumPage() {
                 {user.isLoggedIn && <CommentForum forumId={params.forumId} />}
                 <ul className="list-container">
                     {comments.map((comment) => (
-                        <Comment data={comment} />
+                        <Comment forumId={params.forumId} data={comment} />
                     ))}
                 </ul>
             </section>

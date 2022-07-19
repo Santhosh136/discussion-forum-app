@@ -38,7 +38,24 @@ const getAllCommentsByForumId = (req, res) => {
         });
 };
 
+const deleteComment = (req, res) => {
+
+    Comment.findByIdAndRemove(req.params.commentId)
+    .then((data) =>
+        res
+        .status(202)
+        .json({ message: "Comment deleted successfully", data })
+    )
+    .catch((err) =>
+        res
+            .status(404)
+            .json({ message: "Comment not found", error: err.message })
+    );
+
+}
+
 module.exports = {
     createComment,
-    getAllCommentsByForumId
+    getAllCommentsByForumId,
+    deleteComment
 }
