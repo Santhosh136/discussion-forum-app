@@ -21,7 +21,7 @@ const app = express();
 // initialize middlewares
 app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));
 app.use(express.json({ extended: false }));
-app.use(cors({ origin: true, credentials: true }));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(session({
     secret: process.env.SECRET,
     resave: false,
