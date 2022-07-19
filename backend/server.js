@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 // import modules
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const session = require("express-session");
@@ -18,6 +19,7 @@ const PORT = process.env.PORT;
 const app = express();
 
 // initialize middlewares
+app.use(express.static(path.join(__dirname, "..", "frontend", "dist")));
 app.use(express.json({ extended: false }));
 app.use(cors({ origin: true, credentials: true }));
 app.use(session({
@@ -45,8 +47,7 @@ passport.deserializeUser(User.deserializeUser());
 //     next(); 
 // })
 
-// to test route
-app.get('/', (req, res) => res.send("Hello World"));
+
 
 // use routes
 app.use("/api/forums", forumRoutes);
