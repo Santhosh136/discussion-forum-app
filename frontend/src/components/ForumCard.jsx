@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ListGroup, Button } from "react-bootstrap";
 import axios from "axios";
 
 export default function ForumCard({forum}) {
@@ -14,29 +15,23 @@ export default function ForumCard({forum}) {
             .delete(`/api/forums/${forumId}`)
             .then((res) => console.log(res.data.message))
             .catch(err => console.log("Could not delete a forum",err.message));
-        navigate("/forums");
+        navigate('/forums', { replace: true });
     }
 
     return (
-        <li key={forumId}>
-            <div className="title-description">
-                <Link 
-                    to={`/forums/${forumId}`}
-                    key={forumId}
-                >
-                    <h3>{topic}</h3>
-                </Link>
-                
-                <p>{description}</p>
-                <p>#comments ({comments.length})</p>
-            </div>
-
-            { user.userId == authorId && 
-            <div className="button-container">
-                <button className="button" onClick={handleDelete}>delete</button>
-            </div>
-            }
+        <ListGroup.Item key={forumId} className="my-3">
+            <Link 
+                to={`/forums/${forumId}`}
+                key={forumId}
+            >
+                <h4>{topic}</h4>
+            </Link>
             
-        </li>
+            <p>{description}</p>
+            <p>#comments ({comments.length})</p>
+            { user.userId == authorId && 
+                <Button className="button-sm float-end" variant="danger" onClick={handleDelete}>delete</Button>
+            }
+        </ListGroup.Item>
     );
 }

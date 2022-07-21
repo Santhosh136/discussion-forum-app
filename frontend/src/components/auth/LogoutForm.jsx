@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/user";
+import { Container, Form, Button } from "react-bootstrap";
 
 export default function LogoutForm() {
 
@@ -26,15 +27,13 @@ export default function LogoutForm() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit} >
+        <Container>
+            <Form onSubmit={handleSubmit} >
                 <p>Are you sure want to logout?</p>
-                <button>Yes</button>
-                <Link to='/'>
-                    <button>No</button>
-                </Link>
-            </form>
+                <Button variant="success" className="m-3" type="submit">Yes</Button>
+                <Button className="m-3" variant="outline-danger">No</Button>
+            </Form>
             
-        </div>
+        </Container>
     )
 }

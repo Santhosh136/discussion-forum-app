@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/user";
+import { Container, Form, Button } from "react-bootstrap";
 
 export default function LoginForm() {
 
@@ -51,34 +52,36 @@ export default function LoginForm() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-
-                {loginError && <p>Username or password is incorrect</p>}
-
-                <label className="label" htmlFor="username"> Username </label>
-                <input 
-                    type="text"
-                    name="username"
-                    placeholder='Enter your email...'
-                    onChange={handleChange}
-                    value={data.username}
-                />
-                <label className="label" htmlFor="password"> Password </label>
-                <input 
-                    type="password"
-                    name="password"
-                    placeholder='Enter your password...'
-                    onChange={handleChange}
-                    value={data.password}
-                />
-                <button>Login</button>
-                <button onClick={handleCancel} >Cancel</button>
-
-                <p>New user? sign up here 
+        <Container>
+        <h4 className="my-3">Login here</h4>
+        {loginError && <p >Username or password is incorrect</p>}
+        <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" >
+            <Form.Label htmlFor="username"> Username </Form.Label>
+            <Form.Control 
+                type="text"
+                name="username"
+                placeholder='Enter your email...'
+                onChange={handleChange}
+                defaultValue={data.username}
+            />
+            </Form.Group>
+            <Form.Group className="mb-3" >
+            <Form.Label htmlFor="password"> Password </Form.Label>
+            <Form.Control
+                type="password"
+                name="password"
+                placeholder='Enter your password...'
+                onChange={handleChange}
+                defaultValue={data.password}
+            />
+            </Form.Group>
+            <Button type="submit" variant="primary" className="mx-2">Login</Button>
+            <Button onClick={handleCancel} variant="outline-secondary" className="mx-2">Cancel</Button>
+            <p className="mt-3">New user? sign up here 
                     <Link to="/register" >Sing up</Link>
-                </p>
-            </form>
-        </div>
+            </p>
+        </Form>
+    </Container>
     )
 }

@@ -1,6 +1,7 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { Container, Form, Button } from "react-bootstrap";
 
 export default function RegisterForm() {
 
@@ -43,27 +44,32 @@ export default function RegisterForm() {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label className="label" htmlFor="username"> Username </label>
-                <input 
+        <Container>
+            <h4 className="my-3">Sign up here</h4>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" >
+                <Form.Label htmlFor="username"> Username </Form.Label>
+                <Form.Control 
                     type="text"
                     name="username"
                     placeholder='Enter your email...'
                     onChange={handleChange}
-                    value={data.username}
+                    defaultValue={data.username}
                 />
-                <label className="label" htmlFor="password"> Password </label>
-                <input 
+                </Form.Group>
+                <Form.Group className="mb-3" >
+                <Form.Label htmlFor="password"> Password </Form.Label>
+                <Form.Control
                     type="password"
                     name="password"
                     placeholder='Enter your password...'
                     onChange={handleChange}
-                    value={data.password}
+                    defaultValue={data.password}
                 />
-                <button>Register</button>
-                <button onClick={handleCancel}>Cancel</button>
-            </form>
-        </div>
+                </Form.Group>
+                <Button type="submit" variant="primary" className="mx-2">Register</Button>
+                <Button onClick={handleCancel} variant="outline-secondary" className="mx-2">Cancel</Button>
+            </Form>
+        </Container>
     )
 }

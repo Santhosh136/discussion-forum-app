@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ListGroup, Button } from "react-bootstrap";
 import axios from "axios";
 
 export default function Comment({data, forumId}) {
@@ -15,20 +16,14 @@ export default function Comment({data, forumId}) {
             .then((res) => console.log(res.data.message))
             .catch(err => console.log("Could not delete a comment",err.message));
         
-        navigate(`/forums/${forumId}`);
+        navigate(`/forums/${forumId}`, { replace: true });
     }
 
     return (
-        <li key={_id}>
-            <div className="title-description">
-                <h3>{text}</h3>
-                <p>{createdDate}</p>
-            </div>
-
+        <ListGroup.Item as="li" key={_id}>
+            <p>{text} - by {user.username}</p> 
             { user.userId == authorId &&
-            <div className="button-container">
-                <button className="button" onClick={handleDelete}>delete</button>
-            </div>}
-        </li>
+            <Button className="button-sm" variant="danger" onClick={handleDelete}>delete</Button> }
+        </ListGroup.Item>
     );
 }

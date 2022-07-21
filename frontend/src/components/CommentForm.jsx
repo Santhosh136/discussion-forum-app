@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Container, Form, Button } from "react-bootstrap";
 
 export default function CommentForum({ forumId }) {
 
@@ -39,20 +40,20 @@ export default function CommentForum({ forumId }) {
   }
 
   return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label className="label" htmlFor="comment">
-              Comment
-          </label>
-          <input 
-          type="text"
-          name="text"
-          placeholder='Enter a new comment...'
-          onChange={handleChange}
-          value={data.text}
+      <Container>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" >
+          <Form.Label>New comment</Form.Label>
+          <Form.Control 
+            type="text"
+            name="text"
+            placeholder='Enter a new comment...'
+            onChange={handleChange}
+            defaultValue={data.text}
           />
-          <button >Add comment</button>
-        </form>
-      </div>
+          </Form.Group>
+          <Button type="submit" variant="success" >Add comment</Button>
+        </Form>
+      </Container>
   )
 }

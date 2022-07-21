@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import ForumCard from "./ForumCard";
 import { Outlet } from "react-router-dom";
+import { Container, ListGroup } from "react-bootstrap";
 
 export default function ForumList() {
 
@@ -11,7 +12,6 @@ export default function ForumList() {
         axios
             .get("/api/forums")
             .then((res) => {
-                // console.log(res.data);
                 setForums(res.data);
             })
             .catch((err) => {
@@ -20,15 +20,15 @@ export default function ForumList() {
     },[]);
 
     return (
-        <section className="container">
-            <section className="contents">
-                <h1>Forums</h1>
-                <ul className="list-container">
-                    {forums.map((forum) => (
-                        <ForumCard forum={forum} />
-                    ))}
-                </ul>
-            </section>
-        </section>
+        <Container>
+            <h4 className="my-3 " >Forums</h4>
+            <ListGroup variant="flush" as="ul" className="list-unstyled">
+                {forums.map((forum) => (
+                    <ForumCard forum={forum} />
+                ))}
+            </ListGroup>
+        </Container>
+    
+                
     );
 }

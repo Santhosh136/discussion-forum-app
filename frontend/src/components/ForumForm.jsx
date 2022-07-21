@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Container, Form, Button } from "react-bootstrap";
 
 export default function ForumForm() {
 
@@ -43,32 +44,32 @@ export default function ForumForm() {
   }
 
   return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label className="label" htmlFor="topic">
-              Topic
-          </label>
-          <input 
+      <Container>
+        <h4 className="my-3">Add a new forum</h4>
+        <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" >
+        <Form.Label>Forum topic</Form.Label>
+        <Form.Control 
           type="text"
           name="topic"
-          placeholder='Enter some topic...'
+          placeholder="Enter forum topic here"
           onChange={handleChange}
-          value={data.topic}
-          />
+          defaultValue={data.topic}
+        />
+        </Form.Group>
 
-          <label className="label" htmlFor="description">
-              Description
-          </label>
-          <textarea 
+        <Form.Group className="mb-3" >
+        <Form.Label>Forum Description</Form.Label>
+        <Form.Control 
           type="text"
           name="description"
-          placeholder="Enter some small description..."
+          placeholder="Enter forum description here"
           onChange={handleChange}
-          value={data.description}
-          />
-          <button >Create</button>
-          <button type="cancel">Cancel</button>
-        </form>
-      </div>
+          defaultValue={data.description}
+        />
+        </Form.Group>
+        <Button variant="success" type="submit">Create</Button>
+        </Form>
+      </Container>
   )
 }

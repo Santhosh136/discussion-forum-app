@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import Comment from "./Comment";
 import CommentForum from "./CommentForm";
+import { Container, Alert, ListGroup } from "react-bootstrap";
 
 export default function ForumPage() {
 
@@ -26,17 +27,17 @@ export default function ForumPage() {
     },[]);
 
     return (
-        <section className="container">
-            <section className="contents">
-                <h1>{topic}</h1>
-                <p>{description}</p>
-                {user.isLoggedIn && <CommentForum forumId={params.forumId} />}
-                <ul className="list-container">
-                    {comments.map((comment) => (
+        <Container className="me-auto my-3">
+            <Alert><h4 className="my-1 " >{topic}</h4></Alert>
+            <p>{description}</p>
+            {user.isLoggedIn && <CommentForum forumId={params.forumId} />}
+            <ListGroup variant="flush" as="ul" className="list-unstyled">
+                {comments.map((comment) => (
+                    <ListGroup.Item li="li" >
                         <Comment forumId={params.forumId} data={comment} />
-                    ))}
-                </ul>
-            </section>
-        </section>
+                    </ListGroup.Item>
+                ))}
+            </ListGroup>
+        </Container>
     );
 }
