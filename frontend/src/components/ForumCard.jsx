@@ -15,7 +15,7 @@ export default function ForumCard({forum}) {
             .delete(`/api/forums/${forumId}`)
             .then((res) => console.log(res.data.message))
             .catch(err => console.log("Could not delete a forum",err.message));
-        navigate('/forums', { replace: true });
+        navigate('/', { replace: true });
     }
 
     return (

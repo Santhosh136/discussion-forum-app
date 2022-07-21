@@ -16,7 +16,7 @@ export default function Comment({data, forumId}) {
             .then((res) => console.log(res.data.message))
             .catch(err => console.log("Could not delete a comment",err.message));
         
-        navigate(`/forums/${forumId}`, { replace: true });
+        navigate(`/forums`, { replace: true });
     }
 
     return (

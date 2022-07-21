@@ -27,6 +27,7 @@ export default function Layout() {
         </Container>
       </Navbar>
       <Outlet />
+      
       </div>
     );
 }

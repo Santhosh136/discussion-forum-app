@@ -25,8 +25,7 @@ const createComment = (req, res) => {
 
 const getAllCommentsByForumId = (req, res) => {
 
-    Forum.
-        findById(req.params.id).
+    Forum.findById(req.params.id).
         populate('comments').
         exec(function (err, forum) {
             if (err)

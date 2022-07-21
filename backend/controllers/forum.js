@@ -12,12 +12,15 @@ const getAllForums = (req, res) => {
 
 const getForumById = (req, res) => {
     Forum.findById(req.params.id)
-        .then((forum) => res.json(forum))
-        .catch((err) =>
+    .populate('comments')
+    .exec(function (err, forum) {
+        if (err)
             res
                 .status(404)
-                .json({ message: "Forum not found", error: err.message })
-        );
+                .json({ message: "Forum not found ", error: err.message });
+        else
+            res.send(forum);
+    });
 };
 
 const createForum = (req, res) => {

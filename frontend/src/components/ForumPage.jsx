@@ -9,6 +9,10 @@ import { Container, Alert, ListGroup } from "react-bootstrap";
 export default function ForumPage() {
 
     const [comments, setComments] = useState([]);
+    const [data, setData] = useState({
+        "topic": "",
+        "description": ""
+    });
     const params = useParams();
     const user = useSelector((state) => state.user.value);
 
@@ -17,9 +21,13 @@ export default function ForumPage() {
 
     useEffect(() => {
         axios
-            .get(`/api/forums/${params.forumId}/comments`)
+            .get(`/api/forums/${params.forumId}`)
             .then((res) => {
-                setComments(res.data);
+                setData({
+                    topic: res.data.topic,
+                    description: res.data.description
+                })
+                setComments(res.data.comments);
             })
             .catch((err) => {
                 console.log(err);
@@ -28,8 +36,8 @@ export default function ForumPage() {
 
     return (
         <Container className="me-auto my-3">
-            <Alert><h4 className="my-1 " >{topic}</h4></Alert>
-            <p>{description}</p>
+            <Alert><h4 className="my-1 " >{data.topic}</h4></Alert>
+            <p>{data.description}</p>
             {user.isLoggedIn && <CommentForum forumId={params.forumId} />}
             <ListGroup variant="flush" as="ul" className="list-unstyled">
                 {comments.map((comment) => (

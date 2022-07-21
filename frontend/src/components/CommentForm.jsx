@@ -29,7 +29,7 @@ export default function CommentForum({ forumId }) {
             console.log(err.message);
         });
     
-    navigate(`/forums/${forumId}`)
+    navigate(`/forums`)
   }
 
   function handleChange(e) {
